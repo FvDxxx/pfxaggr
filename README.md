@@ -7,4 +7,6 @@ One thing I just found (after all the years ;-): IPv4-mapped addresses ... ::fff
 
 Oh, an issue ... outing myself as not-too-familiar with Github ...
 
-Anyway, have fun.
+Anyway, have fun. 
+
+And do not use this in your data structure lessons ... there are better data structures (radix tree / trie) than a tree with all intermediate nodes created.
