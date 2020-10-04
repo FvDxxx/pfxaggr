@@ -10,31 +10,36 @@
 void pfx_addr2str(pfx_ipaddr_t addr, char* str, ssize_t strlen) {
 	if (addr.addrtype == v4) {
 		snprintf(str, strlen, "%d.%d.%d.%d",
-			(addr.addr.v4&0xff000000U)>>24, \
-			(addr.addr.v4&0xff0000U)>>16, \
-			(addr.addr.v4&0xff00U)>>8, \
+			(addr.addr.v4&0xff000000U)>>24, 
+			(addr.addr.v4&0xff0000U)>>16, 
+			(addr.addr.v4&0xff00U)>>8, 
 			(addr.addr.v4&0xffU));
 	} else {
 		struct sockaddr_in6 sa;
-		
-		sa.sin6_addr.s6_addr[0]  = (addr.addr.v6.h >> 56) & 0xff;
-		sa.sin6_addr.s6_addr[1]  = (addr.addr.v6.h >> 48) & 0xff;
-		sa.sin6_addr.s6_addr[2]  = (addr.addr.v6.h >> 40) & 0xff;
-		sa.sin6_addr.s6_addr[3]  = (addr.addr.v6.h >> 32) & 0xff;
-		sa.sin6_addr.s6_addr[4]  = (addr.addr.v6.h >> 24) & 0xff;
-		sa.sin6_addr.s6_addr[5]  = (addr.addr.v6.h >> 16) & 0xff;
-		sa.sin6_addr.s6_addr[6]  = (addr.addr.v6.h >>  8) & 0xff;
-		sa.sin6_addr.s6_addr[7]  = (addr.addr.v6.h >>  0) & 0xff;
-		sa.sin6_addr.s6_addr[8]  = (addr.addr.v6.l >> 56) & 0xff;
-		sa.sin6_addr.s6_addr[9]  = (addr.addr.v6.l >> 48) & 0xff;
-		sa.sin6_addr.s6_addr[10] = (addr.addr.v6.l >> 40) & 0xff;
-		sa.sin6_addr.s6_addr[11] = (addr.addr.v6.l >> 32) & 0xff;
-		sa.sin6_addr.s6_addr[12] = (addr.addr.v6.l >> 24) & 0xff;
-		sa.sin6_addr.s6_addr[13] = (addr.addr.v6.l >> 16) & 0xff;
-		sa.sin6_addr.s6_addr[14] = (addr.addr.v6.l >>  8) & 0xff;
-		sa.sin6_addr.s6_addr[15] = (addr.addr.v6.l >>  0) & 0xff;
-		
-		inet_ntop(AF_INET6, &(sa.sin6_addr), str, strlen);
+
+		if ( (addr.addr.v6.h == 0) && ((addr.addr.v6.l & 0xffff00000000U) == 0xffff00000000U) ) {
+			snprintf(str, strlen, "::ffff:%lx:%lx", 
+				(addr.addr.v6.l&0xffff0000U)>>16,
+				(addr.addr.v6.l&0xffffU));
+		} else {
+			sa.sin6_addr.s6_addr[0]  = (addr.addr.v6.h >> 56) & 0xff;
+			sa.sin6_addr.s6_addr[1]  = (addr.addr.v6.h >> 48) & 0xff;
+			sa.sin6_addr.s6_addr[2]  = (addr.addr.v6.h >> 40) & 0xff;
+			sa.sin6_addr.s6_addr[3]  = (addr.addr.v6.h >> 32) & 0xff;
+			sa.sin6_addr.s6_addr[4]  = (addr.addr.v6.h >> 24) & 0xff;
+			sa.sin6_addr.s6_addr[5]  = (addr.addr.v6.h >> 16) & 0xff;
+			sa.sin6_addr.s6_addr[6]  = (addr.addr.v6.h >>  8) & 0xff;
+			sa.sin6_addr.s6_addr[7]  = (addr.addr.v6.h >>  0) & 0xff;
+			sa.sin6_addr.s6_addr[8]  = (addr.addr.v6.l >> 56) & 0xff;
+			sa.sin6_addr.s6_addr[9]  = (addr.addr.v6.l >> 48) & 0xff;
+			sa.sin6_addr.s6_addr[10] = (addr.addr.v6.l >> 40) & 0xff;
+			sa.sin6_addr.s6_addr[11] = (addr.addr.v6.l >> 32) & 0xff;
+			sa.sin6_addr.s6_addr[12] = (addr.addr.v6.l >> 24) & 0xff;
+			sa.sin6_addr.s6_addr[13] = (addr.addr.v6.l >> 16) & 0xff;
+			sa.sin6_addr.s6_addr[14] = (addr.addr.v6.l >>  8) & 0xff;
+			sa.sin6_addr.s6_addr[15] = (addr.addr.v6.l >>  0) & 0xff;
+			inet_ntop(AF_INET6, &(sa.sin6_addr), str, strlen);
+		}
 	}
 }
 
