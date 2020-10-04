@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 			fprintf(stderr, " -c      start output with comment on result\n");
 			fprintf(stderr, " -na     no aggregation (just parse, align, unique and sort)\n");
 			fprintf(stderr, " -a0     report only least specific prefixes of input\n");
-			fprintf(stderr, " -a1     report least specific prefixes (eventually artificial)\n");
+			fprintf(stderr, " -a1     report least specific prefixes (eventually artificial) DEFAULT\n");
 			fprintf(stderr, " -a2     report prefix-length sequences from input as pfx/START-END\n");
 			fprintf(stderr, " -a3     in addition to -a2, also report \"complete\" sets of more\n");
 			fprintf(stderr, "         specific prefix-length sequences as pfx/MASK,/START-END;\n");
