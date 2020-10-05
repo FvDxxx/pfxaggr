@@ -533,7 +533,7 @@ fprintf(stderr, "BEFORE WHILE\n am="); printbitmask(tree->am); fprintf(stderr, "
 #endif
 				i++;
 				while ( tree->am.addr.v4 & ~cm.addr.v4 ) { // we still have not all in our cleanmask
-					int j;
+					int j=0;
 					// skip zeros
 #ifdef DEBUG
 fprintf(stderr, "OUTERWHILE mask=%d, i=%d, cm=", tree->mask, i); printbitmask(cm); fprintf(stderr, " v4bitmasks[mask]="); printbitmask(pfx_v4bits[i]); fprintf(stderr, "\n");
@@ -613,7 +613,7 @@ fprintf(stderr, "6BEFORE WHILE\n am="); printbitmask(tree->am); fprintf(stderr, 
 #endif
 				i++;
 				while ( (tree->am.addr.v6.h & ~cm.addr.v6.h) || (tree->am.addr.v6.l & ~cm.addr.v6.l)) { // we still have not all in our cleanmask
-					int j;
+					int j=0;
 					// skip zeros
 #ifdef DEBUG
 fprintf(stderr, "6OUTERWHILE mask=%d, i=%d, cm=", tree->mask, i); printbitmask(cm); fprintf(stderr, " v6bitmasks[mask]="); printbitmask(pfx_v6bits[i]); fprintf(stderr, "\n");
