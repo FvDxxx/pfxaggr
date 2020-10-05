@@ -18,9 +18,9 @@ void pfx_addr2str(pfx_ipaddr_t addr, char* str, ssize_t strlen) {
 		struct sockaddr_in6 sa;
 
 		if ( (addr.addr.v6.h == 0) && ((addr.addr.v6.l & 0xffff00000000U) == 0xffff00000000U) ) {
-			snprintf(str, strlen, "::ffff:%lx:%lx", 
-				(addr.addr.v6.l&0xffff0000U)>>16,
-				(addr.addr.v6.l&0xffffU));
+			snprintf(str, strlen, "::ffff:%llx:%llx", 
+				(unsigned long long)(addr.addr.v6.l&0xffff0000U)>>16,
+				(unsigned long long)(addr.addr.v6.l&0xffffU));
 		} else {
 			sa.sin6_addr.s6_addr[0]  = (addr.addr.v6.h >> 56) & 0xff;
 			sa.sin6_addr.s6_addr[1]  = (addr.addr.v6.h >> 48) & 0xff;
