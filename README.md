@@ -60,7 +60,7 @@ What do the different modes do? Let's take as example the following input:
 192.0.2.6/31
 ```
 
-`-a3` combines the prefixes of the input in a slightly different notation for exact match with the input. In addition to -a2 also combines complete "sets" from the closest less-specific prefix/mask's perspective (which wasn't part of the input). prefix/mask,/mask1-mask2 states, all possible prefix/m with m between mask1 and mask2 had been present in the input. 
+`-a3` combines the prefixes of the input in a slightly different notation for exact match with the input. In addition to `-a2` also combines complete "sets" from the closest less-specific prefix/mask's perspective (which wasn't part of the input). prefix/mask,/mask1-mask2 states, all possible prefix/m with m between mask1 and mask2 had been present in the input. In some cases the result is not optimal or other "solutions" are possible:
 ```
 192.0.2.0/29,/31-31
 192.0.2.0/30
