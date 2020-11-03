@@ -1,18 +1,24 @@
 # pfxaggr
 Yet another IP aggregation tool (fast)
 
-Description
+SYNOPSIS
+--------
+
+`pfxaggr [-h] [-v|-v -v] [-c] [-na|-a0|-a1|-a2|-a3|-a4]`
+
+
+DESCRIPTION
 -----------
 
 pfxaggr reads from STDIN prefixes in CIDR notation (v4 & v6) and outputs them sorted / aggregated / in another notation to STDOUT. 
 
 
-Installation
+INSTALLATION
 ------------
 make
 
 
-Usage information
+USAGE INFORMATION
 -----------------
 
 What do the different modes do? Let's take as example the following input:
@@ -73,6 +79,21 @@ What do the different modes do? Let's take as example the following input:
 192.0.2.4/30,/31-31
 ```
 
+`-c` adds some statistics at the top of the output, prefixed with #
+```
+# Input v4: 9 unique prefixes
+# Input v6: 0 unique prefixes
+# aggr1 mode
+# Output v4: 1 unique prefixes
+# Output v6: 0 unique prefixes
+192.0.2.0/29
+```
+
+`-v` complains about non-parsable input, `-v -v` also complains about unaligned input.
+
+`-h` gives a short help.
+
+
 PS
 --
 
@@ -82,12 +103,12 @@ PS2: Oh, yes, gcc knows 128bit integers, which would allow easier code writing .
 
 PS3: This is somewhat old code ;-)
 
-Bugs
+BUGS
 ----
 
 Please report bugs at https://github.com/FvDxxx/pfxaggr/issues
 
-Author
+AUTHOR
 ------
 
 Markus Weber <fvd-github@uucp.de>
