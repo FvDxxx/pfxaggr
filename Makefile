@@ -20,7 +20,7 @@ clean:
 	rm -f ${OBJAG}
 
 pfxaggr: ${OBJAG}
-	${CC} ${CFLAGS} -o pfxagg ${OBJAG} $(LIBS_$(OSTYPE))
+	${CC} ${CFLAGS} -o pfxaggr ${OBJAG} $(LIBS_$(OSTYPE))
 
 install: pfxaggr
 	@echo "You better do this manually - or use install-all to copy pfxaggr to"
