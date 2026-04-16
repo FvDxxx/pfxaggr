@@ -16,7 +16,8 @@
 static void add128(pfx_ipaddr_t a, pfx_ipaddr_t b, pfx_ipaddr_t *dst) {
 	// we blindly add, assuming the called knows, those addr are v6
 	dst->addr.v6.l = a.addr.v6.l + b.addr.v6.l;
-	if (a.addr.v6.l&b.addr.v6.l&(1ULL<<63)) {
+	if (dst->addr.v6.l<a.addr.v6.l) {
+		// carry
 		dst->addr.v6.h = a.addr.v6.h + b.addr.v6.h + 1ULL;
 	} else {
 		dst->addr.v6.h = a.addr.v6.h + b.addr.v6.h;
@@ -203,9 +204,15 @@ int pfx_tree_insert(pfx_tree_t *tree, const pfx_ipaddr_t newnet, const unsigned 
 		return 0;
 	}
 	if (newnet.addrtype==v4) {
+		if (newmask>32) {
+			return 0;
+		}
 		retval = pfx_tree_subinsert(tree->v4, newnet, newmask);
 		tree->v4size += retval;
 	} else {
+		if (newmask>128) {
+			return 0;
+		}
 		retval = pfx_tree_subinsert(tree->v6, newnet, newmask);
 		tree->v6size += retval;
 	}
