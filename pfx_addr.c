@@ -127,9 +127,15 @@ int pfx_masknet(pfx_ipaddr_t net, unsigned char mask, pfx_ipaddr_t *newnet) {
 	// we assume the caller gave us equal addr types
 	newnet->addrtype = net.addrtype;
 	if (newnet->addrtype == v4) {
+		if (mask>32) {
+			mask = 32;
+		}
 		newnet->addr.v4 = net.addr.v4 & pfx_v4masks[mask].addr.v4;
 		return (newnet->addr.v4==net.addr.v4);
 	} else {
+		if (mask>128) {
+			mask = 128;
+		}
 		newnet->addr.v6.h = net.addr.v6.h & pfx_v6masks[mask].addr.v6.h;
 		newnet->addr.v6.l = net.addr.v6.l & pfx_v6masks[mask].addr.v6.l;
 		return (newnet->addr.v6.h==net.addr.v6.h && newnet->addr.v6.l==net.addr.v6.l);
