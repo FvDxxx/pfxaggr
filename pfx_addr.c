@@ -6,6 +6,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <stdlib.h>
+#include<string.h>
 
 void pfx_addr2str(pfx_ipaddr_t addr, char* str, ssize_t strlen) {
 	if (addr.addrtype == v4) {
