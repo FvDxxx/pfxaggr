@@ -44,15 +44,16 @@ void pfx_addr2str(pfx_ipaddr_t addr, char* str, ssize_t strlen) {
 }
 
 
-// this does temp change str!!
-int pfx_str2addr(pfx_ipaddr_t *addr, unsigned char *mask, char* str) {
+int pfx_str2addr(pfx_ipaddr_t *addr, unsigned char *mask, char* strarg) {
 	char *sptr;
+	char *str;
 	int retval;
 	char savedchar;
 	
-	if (!str) {
+	if (!strarg) {
 		return 0;
 	}
+	str = strdup(strarg);
 	sptr = str;
 	while (*sptr && *sptr != '.' && *sptr != ':' && ((*sptr>='0'&&*sptr<='9') || (*sptr>='a'&&*sptr<='f') || (*sptr>='A'&&*sptr<='F'))) {
 		sptr++;
@@ -120,6 +121,7 @@ int pfx_str2addr(pfx_ipaddr_t *addr, unsigned char *mask, char* str) {
 			(((unsigned char*) &(sa.sin_addr))[3]<<0); 
 	}
 	*sptr = savedchar;
+	free(str);
 	return retval;
 }
 
