@@ -148,6 +148,7 @@ int main(int argc, char *argv[]) {
 		if (commentmode) {
 			fprintf(stdout, "# no aggr mode\n");
 		}
+		pfx_count = 0; // not really needed, as we don't use pfx_count ... but hey ... make someone happy
 		pfx_tree_iter(tree, v4, iter, &pfx_count);
 		pfx_tree_iter(tree, v6, iter, &pfx_count);
 		break;
@@ -161,6 +162,7 @@ int main(int argc, char *argv[]) {
 			pfx_tree_iteraggr0(tree, v6, itercnt, &pfx_count);
 			fprintf(stdout, "# Output v6: %lu unique prefixes\n", pfx_count);
 		}
+		pfx_count = 0; // not really needed, as we don't use pfx_count ... but hey ... make someone happy
 		pfx_tree_iteraggr0(tree, v4, iter, &pfx_count);
 		pfx_tree_iteraggr0(tree, v6, iter, &pfx_count);
 		break;
@@ -174,6 +176,7 @@ int main(int argc, char *argv[]) {
 			pfx_tree_iteraggr1(tree, v6, itercnt, &pfx_count);
 			fprintf(stdout, "# Output v6: %lu unique prefixes\n", pfx_count);
 		}
+		pfx_count = 0; // not really needed, as we don't use pfx_count ... but hey ... make someone happy
 		pfx_tree_iteraggr1(tree, v4, iter, &pfx_count);
 		pfx_tree_iteraggr1(tree, v6, iter, &pfx_count);
 		break;
@@ -187,6 +190,7 @@ int main(int argc, char *argv[]) {
 			pfx_tree_iteraggr2(tree, v6, itercnt2, &pfx_count);
 			fprintf(stdout, "# Output v6: %lu unique prefixes\n", pfx_count);
 		}
+		pfx_count = 0; // not really needed, as we don't use pfx_count ... but hey ... make someone happy
 		pfx_tree_iteraggr2(tree, v4, iter2, &pfx_count);
 		pfx_tree_iteraggr2(tree, v6, iter2, &pfx_count);
 		break;
@@ -200,6 +204,7 @@ int main(int argc, char *argv[]) {
 			pfx_tree_iteraggr3(tree, v6, itercnt3, &pfx_count);
 			fprintf(stdout, "# Output v6: %lu unique prefixes\n", pfx_count);
 		}
+		pfx_count = 0; // not really needed, as we don't use pfx_count ... but hey ... make someone happy
 		pfx_tree_iteraggr3(tree, v4, iter3, &pfx_count);
 		pfx_tree_iteraggr3(tree, v6, iter3, &pfx_count);
 		break;
@@ -213,10 +218,11 @@ int main(int argc, char *argv[]) {
 			pfx_tree_iteraggr4(tree, v6, itercnt3, &pfx_count);
 			fprintf(stdout, "# Output v6: %lu unique prefixes\n", pfx_count);
 		}
+		pfx_count = 0; // not really needed, as we don't use pfx_count ... but hey ... make someone happy
 		pfx_tree_iteraggr4(tree, v4, iter3, &pfx_count);
 		pfx_tree_iteraggr4(tree, v6, iter3, &pfx_count);
 		break;
 	}
-
+	pfx_tree_destroy(tree);
 	exit(0);
 }
